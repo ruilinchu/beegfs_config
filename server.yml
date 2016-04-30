@@ -1,0 +1,31 @@
+- hosts: server
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - common
+      
+- hosts: mgmt
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - mgmt
+    
+- hosts: meta
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - meta
+    
+- hosts: storage
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - storage
+    
+    
+
+        

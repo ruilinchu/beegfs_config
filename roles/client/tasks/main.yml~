@@ -1,0 +1,52 @@
+- command: uname -r
+  register: uname
+
+- name: install gcc and kernel-devel
+  yum: name={{ item }}
+  with_items:
+    - kernel-devel-{{ uname.stdout }}
+    - gcc
+
+# - name: install beegfs rpm
+#   yum: name={{ item }}
+#   with_fileglob:
+#     - /usr/local/src/beegfs-common*
+#     - /usr/local/src/beegfs-opentk-lib*
+#     - /usr/local/src/beegfs-client*
+#     - /usr/local/src/beegfs-helperd*
+#     - /usr/local/src/beegfs-utils*
+
+- name: install beegfs rpm
+  yum: name={{ item }}
+  with_items:
+    - beegfs-client
+    - beegfs-helperd
+    - beegfs-utils
+    - beeond
+
+- lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmtd_hostname }}'
+- lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
+- lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
+
+- lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^quotaEnabled' line='quotaEnabled = true'      
+  when: quota
+  
+- lineinfile: dest=/etc/beegfs/interface line='{{ item }}' create=yes
+  with_items: "{{ network_interface }}"
+
+- lineinfile: dest=/etc/beegfs/beegfs-mounts.conf regexp='^/mnt/beegfs' line='{{ mount_point }} /etc/beegfs/beegfs-client.conf'  
+
+- lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8 BEEGFS_OPENTK_IBVERBS=1 OFED_INCLUDE_PATH={{ ofed_include_path }}'
+  when: use_rdma
+  
+- command: "/etc/init.d/beegfs-client rebuild"  
+   
+# - shell: "{{ item }}"
+#   with_items:
+#     - "/opt/beegfs/sbin/beegfs-setup-client -m {{ mgmtd_hostname }}"
+#   failed_when: false
+
+- service: name={{ item }} state=started enabled=yes
+  with_items:
+    - beegfs-helperd
+    - beegfs-client

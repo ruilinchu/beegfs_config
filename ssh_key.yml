@@ -1,0 +1,24 @@
+- hosts: all
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+    - name: install ssh key
+      authorized_key: user=root key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" state=present
+
+    - yum: name=epel-release
+      
+    - yum: name={{ item }}
+      with_items:
+        - redhat-lsb-core
+        - ntp
+        - atop
+        - dstat
+
+    - service: name=ntpd state=started enabled=yes
+
+
+    - get_url: url=http://www.beegfs.com/release/latest-stable/dists/beegfs-rhel6.repo dest=/etc/yum.repos.d/beegfs-rhel6.repo
+    - selinux: state=disabled
+
+

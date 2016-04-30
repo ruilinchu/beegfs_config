@@ -1,0 +1,26 @@
+#beegfs_rpm_location: /root/beegfs/*.rpm
+
+network_interface: ["ib0","myri0","eth1"]
+# or a list ["eth1", "eth2"]
+
+mgmtd_IP: 10.125.0.61
+#not a list, must be reachable from all nodes, including clients
+
+mgmtd_hostname: hpc-staging01
+
+mgmtd_dir: /tmp/beegfs/beegfs_mgmtd
+
+meta_dir: /tmp/beegfs/beegfs_meta
+
+storage_dir: ["/tmp/beegfs/beegfs_storage_1"]
+# must be a list for multiple targets per machine, indexed
+
+mount_point: /staging
+
+use_rdma: false
+ofed_include_path:
+
+#index_method: $(hostname | cut -c13-14)
+
+num_workers: 128
+quota: true

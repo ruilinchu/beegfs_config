@@ -1,0 +1,14 @@
+[server]
+hpc-staging[01:03]
+
+[mgmt]
+hpc-staging01 
+
+[meta]
+hpc-staging[01:03]
+
+[storage]
+hpc-staging[01:03]
+
+[client]
+hpc-staging[01:03]

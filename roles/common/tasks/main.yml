@@ -1,0 +1,16 @@
+# - name: copy beegfs rpm to nodes
+#   copy: src={{ item }} dest=/usr/local/src/
+#   with_fileglob:
+#     - "{{ beegfs_rpm_location }}"
+    
+- selinux: state=disabled
+- lineinfile: dest=/etc/hosts line="{{ mgmtd_IP }} {{ mgmtd_hostname }}"
+  
+- yum: name={{ item }}
+  with_items:
+    - ntp
+    - atop
+    - dstat
+    
+- service: name=ntpd state=started enabled=yes
+

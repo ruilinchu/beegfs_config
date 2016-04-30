@@ -1,0 +1,30 @@
+# - name: install beegfs rpm
+#   yum: name={{ item }}
+#   with_fileglob:
+#     - /usr/local/src/beegfs-common*
+#     - /usr/local/src/beegfs-opentk-lib*
+#     - /usr/local/src/beegfs-meta*
+#     - /usr/local/src/beegfs-helperd*
+#     - /usr/local/src/beegfs-utils*
+
+- name: install beegfs rpm
+  yum: name={{ item }}
+  with_items:
+    - beegfs-meta
+    - beegfs-helperd
+    - beegfs-utils
+
+- lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmtd_hostname }}'
+- lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^storeMetaDirectory' line='storeMetaDirectory = {{ meta_dir }}'
+- lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
+  
+- lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'      
+- lineinfile: dest=/etc/beegfs/interface line='{{ item }}' create=yes
+  with_items: "{{ network_interface }}"
+              
+# - shell: "{{ item }}"
+#   with_items:
+#     - "/opt/beegfs/sbin/beegfs-setup-meta -p {{ meta_dir }} -s {{ index_method }} -m {{ mgmtd_hostname }}"
+#   failed_when: false
+                  
+- service: name=beegfs-meta state=started enabled=yes

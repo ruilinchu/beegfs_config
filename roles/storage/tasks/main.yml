@@ -1,0 +1,30 @@
+# - name: install beegfs rpm
+#   yum: name={{ item }}
+#   with_fileglob:
+#     - /usr/local/src/beegfs-common*
+#     - /usr/local/src/beegfs-opentk-lib*
+#     - /usr/local/src/beegfs-storage*
+#     - /usr/local/src/beegfs-helperd*
+#     - /usr/local/src/beegfs-utils*
+
+- name: install beegfs rpm
+  yum: name={{ item }}
+  with_items:
+    - beegfs-storage
+    - beegfs-helperd
+    - beegfs-utils
+
+- lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmtd_hostname }}'
+- lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^storeStorageDirectory' line='storeStorageDirectory = {{ storage_dir | join(',') }} '
+
+- lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
+- lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
+    
+- lineinfile: dest=/etc/beegfs/interface line='{{ item }}' create=yes
+  with_items: "{{ network_interface }}"
+
+# - shell: "/opt/beegfs/sbin/beegfs-setup-storage -p {{ item.1 }} -s {{ index_method }} -i {{ index_method }}{{ item.0 }} -m {{ mgmtd_hostname }}"
+#   with_indexed_items: "{{ storage_dir }}"
+#   failed_when: false
+      
+- service: name=beegfs-storage state=started enabled=yes

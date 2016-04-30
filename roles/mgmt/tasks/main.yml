@@ -1,0 +1,34 @@
+# - name: install beegfs rpm
+#   yum: name={{ item }}
+#   with_fileglob:
+#     - /usr/local/src/beegfs-common*
+#     - /usr/local/src/beegfs-opentk-lib*
+#     - /usr/local/src/beegfs-mgmtd*
+#     - /usr/local/src/beegfs-admon*
+#     - /usr/local/src/beegfs-helperd*
+#     - /usr/local/src/beegfs-utils*
+
+- name: install beegfs rpm
+  yum: name={{ item }}
+  with_items:
+    - beegfs-mgmtd
+    - beegfs-admon
+    - beegfs-helperd
+    - beegfs-utils
+
+- lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^storeMgmtdDirectory' line='storeMgmtdDirectory = {{ mgmtd_dir }}'      
+- lineinfile: dest=/etc/beegfs/beegfs-admon.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmtd_hostname }}'
+- lineinfile: dest=/etc/beegfs/beegfs-admon.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'      
+- lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'      
+
+- lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
+- lineinfile: dest=/etc/beegfs/beegfs-admon.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
+
+    
+- lineinfile: dest=/etc/beegfs/interface line='{{ item }}' create=yes
+  with_items: "{{ network_interface }}"
+  
+# - command: "/opt/beegfs/sbin/beegfs-setup-mgmtd -p {{ mgmtd_dir }}"
+#   failed_when: false
+
+- service: name=beegfs-mgmtd state=started enabled=yes

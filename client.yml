@@ -1,0 +1,9 @@
+- hosts: client
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - client
+    
+
+        
