@@ -3,6 +3,7 @@
   remote_user: root
 
   roles:
+    - common
     - client
     
 
