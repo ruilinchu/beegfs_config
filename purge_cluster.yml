@@ -39,7 +39,7 @@
         - beegfs-common
       failed_when: false
       
-    - file: path="{{ storage_dir }}" state=absent
+#    - file: path="{{ storage_dir }}" state=absent
             
             
 - hosts: meta

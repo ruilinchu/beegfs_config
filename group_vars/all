@@ -1,6 +1,6 @@
 #beegfs_rpm_location: /root/beegfs/*.rpm
 
-network_interface: ["ib0","myri0","eth1"]
+network_interface: ["ib0","myri0","eth0"]
 # or a list ["eth1", "eth2"]
 
 #mgmtd_IP: 10.125.0.61
@@ -18,6 +18,8 @@ storage_dir: ["/var/staging-data"]
 mount_point: /staging
 
 use_rdma: true
+ofed: true
+
 ofed_include_path: /usr/src/openib/include
 
 #index_method: $(hostname | cut -c13-14)
