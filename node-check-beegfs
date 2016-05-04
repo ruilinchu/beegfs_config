@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if ! df | grep beegfs_nodev &> /dev/null; then
+   echo "/staging not mounted"
+   exit
+fi
