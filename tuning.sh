@@ -1,10 +1,12 @@
 
 #meta
-echo deadline > /sys/block/sda7/queue/scheduler
-echo 128 > /sys/block/sda7/queue/nr_requests
+echo deadline > /sys/block/sda/queue/scheduler
+echo 128 > /sys/block/sda/queue/nr_requests
 
 echo madvise > /sys/kernel/mm/redhat_transparent_hugepage/enabled
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor >/dev/null
+
+for i in $(seq 0 $(echo $(nproc --a) -1 | bc)); do echo performance |tee /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor >/dev/null; done
 
 #data
 echo deadline > /sys/block/sdb/queue/scheduler
