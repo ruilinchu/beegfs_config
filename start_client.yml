@@ -3,4 +3,8 @@
   remote_user: root
   
   tasks:
-    - service: name=beegfs-client state=started
+    - service: name=beegfs-helperd state=started enabled=yes
+    - service: name=beegfs-client state=started enabled=yes
+
+
+    

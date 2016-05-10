@@ -1,0 +1,6 @@
+- hosts: client
+  gather_facts: no
+  remote_user: root
+  
+  tasks:
+    - shell: " if ! grep beegfs_ondemand /proc/mounts &> /dev/null && [ -f /tmp/beeond.tmp ] ; then echo $(hostname) > /tmp/nodefile; beeond stop -n /tmp/nodefile -i /tmp/beeond.tmp -d -L -c -q; rm -f /tmp/nodefile; fi " 
