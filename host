@@ -1,6 +1,3 @@
-[server]
-hpc-staging[01:12]
-
 [mgmt]
 hpc-staging01 
 
@@ -9,6 +6,11 @@ hpc-staging[01:12]
 
 [storage]
 hpc-staging[01:12]
+
+[server:children]
+mgmt
+meta
+storage
 
 [client]
 hpc-test07 
