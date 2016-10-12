@@ -17,9 +17,7 @@ storage_dir: ["/var/staging-data"]
 
 mount_point: /staging
 
-use_rdma: true
 ofed: true
-
 ofed_include_path: /usr/src/openib/include
 
 index_method: $(hostname -s | cut -c12-)
