@@ -1,8 +1,0 @@
-- hosts: client
-  gather_facts: no
-  remote_user: root
-  
-  tasks:
-    - command: "! df | grep beegfs_nodev &> /dev/null && service beegfs-client restart"
-
-    
