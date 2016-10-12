@@ -28,7 +28,6 @@
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
 
-
 - lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
 - lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
 - lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'      
@@ -36,23 +35,29 @@
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^quotaEnabled' line='quotaEnabled = true'      
   when: quota
   
+- file: path=/etc/beegfs/interface state=absent
+
+- lineinfile: dest=/etc/beegfs/interface line='ib0' create=yes
+  when: ansible_ib0.device is defined
+
 - lineinfile: dest=/etc/beegfs/interface line='{{ item }}' create=yes
+  when: ansible_{{ item }}.device is defined
   with_items: "{{ network_interface }}"
 
-- lineinfile: dest=/etc/beegfs/beegfs-mounts.conf regexp='^/mnt/beegfs' line='{{ mount_point }} /etc/beegfs/beegfs-client.conf'  
+- lineinfile: dest=/etc/beegfs/beegfs-mounts.conf regexp='^/mnt/beegfs' line='{{ mount_point }} /etc/beegfs/beegfs-client.conf'
 
 - lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8 BEEGFS_OPENTK_IBVERBS=1 '
-  when: use_rdma
-  
+  when: ansible_ib0.device is defined
+
 - lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8 BEEGFS_OPENTK_IBVERBS=1 OFED_INCLUDE_PATH={{ ofed_include_path }}'
-  when: ofed
+  when: ofed and ansible_ib0.device is defined
 
 - lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8'
-  when: ! use_rdma
+  when: ansible_ib0.device is undefined
 
 - command: "beegfs-setup-rdma"
-  when: use_rdma
-
+  when: ansible_ib0.device is defined
+  
 - command: "/etc/init.d/beegfs-client rebuild"  
 
 - service: name={{ item }} state=started enabled=yes
