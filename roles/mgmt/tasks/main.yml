@@ -27,11 +27,16 @@
 - lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'      
 - lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
 
-    
+- file: path=/etc/beegfs/interface state=absent
+
+- lineinfile: dest=/etc/beegfs/interface line='ib0' create=yes
+  when: ansible_ib0.device is defined
+
 - lineinfile: dest=/etc/beegfs/interface line='{{ item }}' create=yes
+  when: ansible_{{ item }}.device is defined
   with_items: "{{ network_interface }}"
   
-# - command: "/opt/beegfs/sbin/beegfs-setup-mgmtd -p {{ mgmtd_dir }}"
-#   failed_when: false
+- command: "/opt/beegfs/sbin/beegfs-setup-mgmtd -p {{ mgmtd_dir }}"
+  failed_when: false
 
 - service: name=beegfs-mgmtd state=started enabled=yes
