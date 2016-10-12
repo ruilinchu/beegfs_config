@@ -22,7 +22,7 @@ ofed: true
 
 ofed_include_path: /usr/src/openib/include
 
-#index_method: $(hostname | cut -c13-14)
+index_method: $(hostname -s | cut -c12-)
 
 num_workers: 24
 quota: true
