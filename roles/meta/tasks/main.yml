@@ -28,12 +28,19 @@
 - lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^storeUseExtendedAttribs' line='storeUseExtendedAttribs      = true'
   
 - lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'      
+
+- file: path=/etc/beegfs/interface state=absent
+
+- lineinfile: dest=/etc/beegfs/interface line='ib0' create=yes
+  when: ansible_ib0.device is defined
+
 - lineinfile: dest=/etc/beegfs/interface line='{{ item }}' create=yes
+  when: ansible_{{ item }}.device is defined
   with_items: "{{ network_interface }}"
-              
-# - shell: "{{ item }}"
-#   with_items:
-#     - "/opt/beegfs/sbin/beegfs-setup-meta -p {{ meta_dir }} -s {{ index_method }} -m {{ mgmtd_hostname }}"
-#   failed_when: false
+             
+- shell: "{{ item }}"
+  with_items:
+    - "/opt/beegfs/sbin/beegfs-setup-meta -p {{ meta_dir }} -s {{ index_method }} -m {{ mgmtd_hostname }}"
+  failed_when: false
                   
 - service: name=beegfs-meta state=started enabled=yes
