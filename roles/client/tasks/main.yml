@@ -33,7 +33,7 @@
 - lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'      
 
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^quotaEnabled' line='quotaEnabled = true'      
-  when: quota
+  when: quota|bool
   
 - file: path=/etc/beegfs/interface state=absent
 
