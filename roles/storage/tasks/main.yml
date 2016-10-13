@@ -28,7 +28,7 @@
 - lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
 - lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
 - lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^quotaEnableEnforcement' line='quotaEnableEnforcement = true'
-  when: quota_enforce
+  when: quota_enforce|bool
   
 - file: path=/etc/beegfs/interface state=absent
 - lineinfile: dest=/etc/beegfs/interface line='ib0' create=yes
