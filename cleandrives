@@ -1,4 +1,5 @@
 #!/bin/sh
+#written by Sebulon https://forums.freebsd.org
 
 if [ -z "$1" ]
   then
