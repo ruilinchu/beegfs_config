@@ -1,3 +1,5 @@
+##put in /etc/rc.local
+
 echo 4194304 > /sys/module/zfs/parameters/zfs_max_recordsize
 echo deadline > /sys/module/zfs/parameters/zfs_vdev_scheduler
 echo 1310720 > /sys/module/zfs/parameters/zfs_read_chunk_size
