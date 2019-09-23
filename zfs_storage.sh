@@ -1,4 +1,4 @@
-##put in /etc/rc.local
+##put in a start up systemd service
 
 echo 4194304 > /sys/module/zfs/parameters/zfs_max_recordsize
 echo deadline > /sys/module/zfs/parameters/zfs_vdev_scheduler
