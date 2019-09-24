@@ -7,4 +7,4 @@ max out RAM
 pcie nvme ssd mirror for metadata
 zfs parameter tunning
 custom import_zpool start up systemd script
-ib interfaces
+ib interfaces, RDMA
