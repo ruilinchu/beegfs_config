@@ -1,6 +1,11 @@
 #!/bin/sh
 
-for i in `lsblk | grep disk | grep "1.8T" | awk '{print $1}'`; do path=$(echo /sys/class/enclosure/*/*/device/block/$i);echo $path / wwn-0x$(cat "$path/../../wwid"|cut -d"." -f2); done > all
+for i in `lsblk | grep disk | grep "1.8T" | awk '{print $1}'`; do 
+  path=$(echo /sys/class/enclosure/*/*/device/block/$i);
+  echo $path / wwn-0x$(cat "$path/../../wwid"|cut -d"." -f2); 
+done > all
+## give out enclosure, slot position, device label, serial number used by zpool
+## /sys/class/enclosure/10:0:62:0/SLOT 1 00 /device/block/sdte / wwn-0x5000cca222f39497
 
 declare -i pn=1;
 
