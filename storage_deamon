@@ -12,16 +12,20 @@ for dn in `seq 1 9`;do
   echo ib$dn > /etc/beegfs/interface_$dn
 done
 
+if [ $(hostname) == hpc-10ke1.hpcc.usc.edu ];then
 declare -i pn=1
 while [ $pn -lt 58 ];do
   dn=`echo $(( ($pn-1)/2 % 9 +1))`
   /opt/beegfs/sbin/beegfs-setup-storage -c /etc/beegfs/inst$dn.d/beegfs-storage.conf -p /data/pool-$pn -s 1$dn -S DDN-1-inst$dn -i $pn
   pn=pn+2
 done
+fi
 
+if [ $(hostname) == hpc-10ke2.hpcc.usc.edu ];then
 declare -i pn=2
 while [ $pn -lt 58 ];do
   dn=`echo $(( ($pn-2)/2 % 9 + 1))`
   /opt/beegfs/sbin/beegfs-setup-storage -c /etc/beegfs/inst$dn.d/beegfs-storage.conf -p /data/pool-$pn -s 2$dn -S DDN-2-inst$dn -i $pn
   pn=pn+2
 done
+fi
