@@ -1,0 +1,10 @@
+[Unit]
+Description=Import zfs pools for beegfs
+After=network-online.target rdma.service zfs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/import_zpool
+
+[Install]
+WantedBy=multi-user.target
