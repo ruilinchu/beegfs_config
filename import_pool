@@ -20,7 +20,7 @@ echo 262144 > /sys/module/zfs/parameters/zfs_vdev_aggregation_limit
 ## pn=1 on node1, pn=2 on node2
 declare -i pn=1
 while [ $pn -lt 58 ]; do
-  zpool import -d /dev/disk/by-id -N pool-$pn;
+  zpool import -d /dev/disk/by-id pool-$pn;
   pn=pn+2;
 done
 
