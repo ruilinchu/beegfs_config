@@ -1,0 +1,15 @@
+## distribute 57 pools to 9 deamons on both nodes
+
+declare -i pn=1
+while [ $pn -lt 58 ];do
+  dn=`echo $(( ($pn-1)/2 % 9 +1))`
+  /opt/beegfs/sbin/beegfs-setup-storage -c /etc/beegfs/inst$dn.d/beegfs-storage.conf -p /data/pool-$pn -s 1$dn -S DDN-1-inst$dn -i $pn
+  pn=pn+2
+done
+
+declare -i pn=2
+while [ $pn -lt 58 ];do
+  dn=`echo $(( ($pn-2)/2 % 9 + 1))`
+  /opt/beegfs/sbin/beegfs-setup-storage -c /etc/beegfs/inst$dn.d/beegfs-storage.conf -p /data/pool-$pn -s 2$dn -S DDN-2-inst$dn -i $pn
+  pn=pn+2
+done
