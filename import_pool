@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 ##disable HyperThreading
 for i in $(grep -H . /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | sort -n -t ',' -k 2 -u | cut -d"," -f2); 
