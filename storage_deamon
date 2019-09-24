@@ -1,3 +1,4 @@
+#!/bin/sh
 ## distribute 57 pools to 9 deamons on both nodes
 
 for dn in `seq 1 9`;do
