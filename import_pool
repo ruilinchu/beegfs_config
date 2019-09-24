@@ -1,5 +1,7 @@
 #!/bin/sh
 
+#used by /etc/systemd/system/import_zpool.service
+
 ##disable HyperThreading
 for i in $(grep -H . /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | sort -n -t ',' -k 2 -u | cut -d"," -f2); 
 do 
@@ -20,3 +22,5 @@ while [ $pn -lt 58 ]; do
   zpool import -d /dev/disk/by-id -N pool-$pn;
   pn=pn+2;
 done
+
+##import metadata pool 
