@@ -3,10 +3,13 @@
 for dn in `seq 1 9`;do
   mkdir  /etc/beegfs/inst$dn.d
   cp /etc/beegfs/beegfs-storage.conf /etc/beegfs/inst$dn.d/
-  #edit mgmt-host
-  #edit port number
-  #edit log file
-  #edit interface file
+
+  sed -i "/sysMgmtdHost/c\sysMgmtdHost = hpc-10ke1.hpcc.usc.edu " /etc/beegfs/inst$dn.d/beegfs-storage.conf
+  sed -i "/connStoragePortTCP/c\connStoragePortTCP = 900$dn " /etc/beegfs/inst$dn.d/beegfs-storage.conf
+  sed -i "/connStoragePortUDP/c\connStoragePortUDP = 900$dn " /etc/beegfs/inst$dn.d/beegfs-storage.conf
+  sed -i "/logStdFile/c\logStdFile =  /var/log/beegfs-storage_$dn.log" /etc/beegfs/inst$dn.d/beegfs-storage.conf
+  sed -i "/connInterfacesFile/c\connInterfacesFile = /etc/beegfs/interface_$dn " /etc/beegfs/inst$dn.d/beegfs-storage.conf
+  echo ib$dn > /etc/beegfs/interface_$dn
 done
 
 declare -i pn=1
