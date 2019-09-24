@@ -1,0 +1,6 @@
+disable selinux
+disable auditd, chkconfig auditd off
+disable cpu power saving, set grub intel_idle.max_cstate=0 processor.max_cstate=1
+max out RAM
+pcie nvme ssd mirror for metadata
+custom import_zpool start up systemd script
