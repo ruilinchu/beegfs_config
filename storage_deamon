@@ -6,7 +6,7 @@ for dn in `seq 1 9`;do
   #edit mgmt-host
   #edit port number
   #edit log file
-  
+  #edit interface file
 done
 
 declare -i pn=1
