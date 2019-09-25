@@ -30,3 +30,7 @@ while [ $pn -lt 58 ];do
   pn=pn+2
 done
 fi
+
+for dn in `seq 1 9`;do
+  systemctl enable beegfs-storage@inst$dn
+done
