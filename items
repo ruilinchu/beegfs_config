@@ -8,7 +8,9 @@ pcie nvme ssd mirror for metadata
 zfs parameter tunning
 custom import_zpool start up systemd script
 ib interfaces, RDMA
+set metadata in /backup first, when nvme ssd is in, do "cp -a" to new folder (archive copy preserve attr)
 
+-----------------------------------------
 each of both nodes run 9 storage daemons, 
 node1 hosts 29 zpools
 node2 hosts 28 zpools
