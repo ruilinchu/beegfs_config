@@ -9,6 +9,20 @@ zfs parameter tunning
 custom import_zpool start up systemd script
 ib interfaces, RDMA
 set metadata in /backup first, when nvme ssd is in, do "cp -a" to new folder (archive copy preserve attr)
+-----------------------------------------
+left enclosure:(front view)
+1: 9:0:62:0
+2: 9:0:4:0
+3: 8:0:4:0
+4: 8:0:62:0
+5: 7:0:62:0
+
+right enclosure:(front view)
+6: 7:0:4:0
+7: 6:0:62:0
+8: 6:0:4:0
+9: 10:0:62:0
+10: 10:0:4:0
 
 -----------------------------------------
 each of both nodes run 9 storage daemons, 
