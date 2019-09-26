@@ -1,13 +1,27 @@
 
 ```
-beeond launch node need have ssh access to nodes
-all nodes needs to resolve the beeond mgmt nodes (can be any)
-beeond start -n nodefile -i /tmp/beeond.tmp -d /tmp/scratch -c /scratch -f /etc/beegfs/ -p 1999 -s $(( numnodes < 16 ? numnodes : 16 ))
-beeond stop -n nodefile -i /tmp/beeond.tmp -d -L -c -q
+[root@hpc-10ke1 ~]# dd if=/dev/zero of=/data/pool-1/output conv=fdatasync bs=384k count=1k
 
-/etc/sysctl.conf:
-vm.min_free_kbytes = 262144
-## 1 gives higher performance, but will crash service OOM if mem is tight
-vm.zone_reclaim_mode = 1
+1024+0 records in
+
+1024+0 records out
+
+402653184 bytes (403 MB) copied, 1.10774 s, 363 MB/s
+
+[root@hpc-10ke1 ~]# dd if=/dev/zero of=/data/pool-1/output conv=fdatasync bs=384k count=10k
+
+10240+0 records in
+
+10240+0 records out
+
+4026531840 bytes (4.0 GB) copied, 37.7537 s, 107 MB/s
+
+[root@hpc-10ke1 ~]# dd if=/dev/zero of=/data/pool-1/output conv=fdatasync bs=4M count=1k
+
+1024+0 records in
+
+1024+0 records out
+
+4294967296 bytes (4.3 GB) copied, 8.91644 s, 482 MB/s
 
 ```
