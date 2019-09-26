@@ -24,6 +24,17 @@ right enclosure:(front view)
 9: 10:0:62:0
 10: 10:0:4:0
 
+[6:0:4:0] MXE3400015HRB022
+[6:0:62:0] MXE3400011MRB08F
+[7:0:4:0] MXE3400014IRB1CC
+[7:0:62:0] MXE3400014IRB1D3
+[8:0:4:0] MXE3400014IRB171
+[8:0:62:0] MXE3400014IRB1DC
+[9:0:4:0] MXE3400014IRB1E1
+[9:0:62:0] MXE3400011MRB003
+[10:0:4:0] MXE3400014IRB1C2
+[10:0:62:0] MXE3400011MRB020
+
 -----------------------------------------
 each of both nodes run 9 storage daemons, 
 node1 hosts 29 zpools
