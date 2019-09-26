@@ -1,0 +1,6 @@
+#!/bin/sh
+
+lsscsi -g | grep enclo | awk '{print $1 $7}' | while read a b
+  serial=$(sg_ses -j $b | grep alarm | grep BsBoard| awk '{print $3}')
+  echo $a $serial
+done
