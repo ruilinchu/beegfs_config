@@ -26,7 +26,6 @@
 
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmtd_hostname }}'
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
-- lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^tuneNumWorkers' line='tuneNumWorkers = {{ num_workers }}'
 
 - lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
 - lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
