@@ -23,6 +23,12 @@ echo 1 > /proc/sys/vm/zone_reclaim_mode
 
 echo always > /sys/kernel/mm/transparent_hugepage/enabled
 echo always > /sys/kernel/mm/transparent_hugepage/defrag
+
+## fix for arp flux issue on multiple interface
+echo 1 > /proc/sys/net/ipv4/conf/all/arp_ignore
+echo 2 > /proc/sys/net/ipv4/conf/all/arp_announce
+echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter
+
 ## disable zfs-import-cache, zfs-import-scan, zfs-mount, zfs-share services, do manual import, 
 ## 1 import odd pools, 2 import even pools, avoid mix up
 ## pn=1 on node1, pn=2 on node2
