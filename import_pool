@@ -2,12 +2,6 @@
 
 #used by /etc/systemd/system/import_zpool.service
 
-##disable HyperThreading, cpu load goes crazy high, let not do this 
-#for i in $(grep -H . /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | sort -n -t ',' -k 2 -u | cut -d"," -f2); 
-#do 
-#  echo 0 > /sys/devices/system/cpu/cpu${i}/online;
-#done
-
 #zfs tuning for storage
 # 32G arc size, bigger better
 echo 34359738368 > /sys/module/zfs/parameters/zfs_arc_max
