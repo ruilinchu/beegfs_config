@@ -79,8 +79,8 @@ Stripe pattern details:
 
 -bash-4.2$ cat job.sl 
 #!/bin/bash
-#SBATCH -N 8
-#SBATCH -n 8
+#SBATCH -N 5
+#SBATCH -n 5
 srun --mpi=pmix_v2 ior -v -w -r -i 4 -F -t 2m -b 10g
 
 ```
