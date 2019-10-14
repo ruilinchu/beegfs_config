@@ -1,4 +1,3 @@
-##zfs tune
 #default 2 10 1 3
 echo 10 > /sys/module/zfs/parameters/zfs_vdev_async_write_min_active
 echo 15 > /sys/module/zfs/parameters/zfs_vdev_async_write_max_active
@@ -23,6 +22,10 @@ echo 1 > /sys/module/zfs/parameters/metaslab_debug_unload
 echo 2147483648 > /sys/module/zfs/parameters/zfs_dirty_data_max
 #echo 4294967296 > /sys/module/zfs/parameters/zfs_dirty_data_max
 
+echo 42949672960 > /sys/module/zfs/parameters/zfs_arc_max
+echo 42949672960 > /sys/module/zfs/parameters/zfs_arc_min
+echo 42949672960 > /sys/module/zfs/parameters/zfs_arc_meta_limit
+
 echo 20 > /sys/module/zfs/parameters/zfs_vdev_async_write_active_min_dirty_percent 
 echo deadline > /sys/module/zfs/parameters/zfs_vdev_scheduler
 
@@ -33,4 +36,3 @@ echo 1310720 > /sys/module/zfs/parameters/zfs_read_chunk_size
 
 echo 5 > /proc/sys/vm/dirty_background_ratio
 echo 10 > /proc/sys/vm/dirty_ratio
-
