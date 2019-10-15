@@ -24,7 +24,7 @@ echo 2147483648 > /sys/module/zfs/parameters/zfs_dirty_data_max
 
 echo 42949672960 > /sys/module/zfs/parameters/zfs_arc_max
 echo 42949672960 > /sys/module/zfs/parameters/zfs_arc_min
-echo 4294967296 > /sys/module/zfs/parameters/zfs_arc_meta_limit
+echo 42949672960 > /sys/module/zfs/parameters/zfs_arc_meta_limit
 
 echo 20 > /sys/module/zfs/parameters/zfs_vdev_async_write_active_min_dirty_percent 
 echo deadline > /sys/module/zfs/parameters/zfs_vdev_scheduler
