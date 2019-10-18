@@ -1,4 +1,5 @@
 disable selinux
+disable smartd
 disable auditd, chkconfig auditd off
 ntp, timezone
 disable cpu power saving, set in grub intel_idle.max_cstate=0 processor.max_cstate=1
