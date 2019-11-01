@@ -9,6 +9,14 @@ Vagrant.configure("2") do |config|
       node.vm.box = "box-cutter/centos67"
       node.vm.hostname = "hpc-staging0#{i}"
       node.vm.network :private_network, ip: "10.125.0.6#{i}"
+      
+      node.vm.provision "shell", inline: <<-SHELL
+        sed -i '/PubkeyAuthentication/c\PubkeyAuthentication yes ' /etc/ssh/sshd_config    
+        sed -i '/PermitRootLogin/c\PermitRootLogin yes ' /etc/ssh/sshd_config    
+        sed -i '/PasswordAuthentication/c\PasswordAuthentication yes ' /etc/ssh/sshd_config    
+        systemctl restart sshd
+      SHELL
+      
       node.vm.provider "virtualbox" do |vb|
         vb.memory = "1024"
       #   (0..2).each do |d|
