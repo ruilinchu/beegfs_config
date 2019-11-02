@@ -16,7 +16,9 @@ Vagrant.configure("2") do |config|
         sed -i '/PasswordAuthentication/c\PasswordAuthentication yes ' /etc/ssh/sshd_config    
         systemctl restart sshd
       SHELL
-      
+
+      node.vm.synced_folder ".", "/vagrant", type:"nfs"
+  
       node.vm.provider "virtualbox" do |vb|
         vb.memory = "1024"
       #   (0..2).each do |d|
