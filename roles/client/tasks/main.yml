@@ -22,6 +22,7 @@
     - beegfs-client
     - beegfs-helperd
     - beegfs-utils
+    - libbeegfs-ib
     - beeond
 
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmtd_hostname }}'
@@ -45,19 +46,19 @@
 
 - lineinfile: dest=/etc/beegfs/beegfs-mounts.conf regexp='^/mnt/beegfs' line='{{ mount_point }} /etc/beegfs/beegfs-client.conf'
 
-- lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8'
-  when: ansible_ib0.device is undefined
+#- lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8'
+#  when: ansible_ib0.device is undefined
 
-- lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8 BEEGFS_OPENTK_IBVERBS=1 '
-  when: (ansible_ib0.device is defined and not ofed|bool)
+#- lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8 BEEGFS_OPENTK_IBVERBS=1 '
+#  when: (ansible_ib0.device is defined and not ofed|bool)
 
-- lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8 BEEGFS_OPENTK_IBVERBS=1 OFED_INCLUDE_PATH={{ ofed_include_path }}'
-  when: (ansible_ib0.device is defined and ofed|bool)
+#- lineinfile: dest=/etc/beegfs/beegfs-client-autobuild.conf regexp='^buildArgs=' line='buildArgs=-j8 BEEGFS_OPENTK_IBVERBS=1 OFED_INCLUDE_PATH={{ ofed_include_path }}'
+#  when: (ansible_ib0.device is defined and ofed|bool)
 
-- command: "beegfs-setup-rdma"
-  when: ansible_ib0.device is defined
+#- command: "beegfs-setup-rdma"
+#  when: ansible_ib0.device is defined
   
-- command: "/etc/init.d/beegfs-client rebuild"  
+#- command: "/etc/init.d/beegfs-client rebuild"  
 
 - service: name={{ item }} state=started enabled=yes
   with_items:
