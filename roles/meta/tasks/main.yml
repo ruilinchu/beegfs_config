@@ -40,7 +40,7 @@
              
 - shell: "{{ item }}"
   with_items:
-    - "/opt/beegfs/sbin/beegfs-setup-meta -p {{ meta_dir }} -s {{ index_method }} -m {{ mgmtd_hostname }}"
+    - "/opt/beegfs/sbin/beegfs-setup-meta -p {{ meta_dir }} -s {{ index_method }}"
   failed_when: false
                   
 - service: name=beegfs-meta state=started enabled=yes
