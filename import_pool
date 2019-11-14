@@ -12,5 +12,5 @@ echo 1 > /proc/sys/vm/zone_reclaim_mode
 echo always > /sys/kernel/mm/transparent_hugepage/enabled
 echo always > /sys/kernel/mm/transparent_hugepage/defrag
 
-## disable zfs-import-cache, zfs-import-scan services, do manual import with multipath
+## disable zfs-import-cache, zfs-import-scan, zfs-mount services, do manual import with multipath
 zpool import -d /dev/mapper -a
