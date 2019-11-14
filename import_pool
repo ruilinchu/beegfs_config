@@ -14,3 +14,4 @@ echo always > /sys/kernel/mm/transparent_hugepage/defrag
 
 ## disable zfs-import-cache, zfs-import-scan, zfs-mount services, do manual import with multipath
 zpool import -d /dev/mapper -a
+zpool import -d /dev/disk/by-id/ meta
