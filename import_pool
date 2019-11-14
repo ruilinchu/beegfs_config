@@ -2,15 +2,7 @@
 
 #used by /etc/systemd/system/import_zpool.service
 
-#zfs tuning for storage
-# 32G arc size, bigger better
-echo 34359738368 > /sys/module/zfs/parameters/zfs_arc_max
-echo 4194304 > /sys/module/zfs/parameters/zfs_max_recordsize
-echo deadline > /sys/module/zfs/parameters/zfs_vdev_scheduler
-echo 1310720 > /sys/module/zfs/parameters/zfs_read_chunk_size
-echo 0 > /sys/module/zfs/parameters/zfs_prefetch_disable
-echo 262144 > /sys/module/zfs/parameters/zfs_vdev_aggregation_limit
-## some other general tuning for beegfs
+## some general tuning for beegfs
 echo 5 > /proc/sys/vm/dirty_background_ratio
 echo 20 > /proc/sys/vm/dirty_ratio
 echo 50 > /proc/sys/vm/vfs_cache_pressure
@@ -20,18 +12,5 @@ echo 1 > /proc/sys/vm/zone_reclaim_mode
 echo always > /sys/kernel/mm/transparent_hugepage/enabled
 echo always > /sys/kernel/mm/transparent_hugepage/defrag
 
-## fix for arp flux issue on multiple interface
-echo 1 > /proc/sys/net/ipv4/conf/all/arp_ignore
-echo 2 > /proc/sys/net/ipv4/conf/all/arp_announce
-echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter
-
-## disable zfs-import-cache, zfs-import-scan, zfs-mount, zfs-share services, do manual import, 
-## 1 import odd pools, 2 import even pools, avoid mix up
-## pn=1 on node1, pn=2 on node2
-declare -i pn=1
-while [ $pn -lt 58 ]; do
-  zpool import -d /dev/disk/by-id pool-$pn;
-  pn=pn+2;
-done
-
-##import metadata pool 
+## disable zfs-import-cache, zfs-import-scan, zfs-mount, zfs-share services, do manual import with multipath
+zpool import -d /dev/mapper -a
