@@ -27,7 +27,7 @@ zpool create -f -O compression=off -O recordsize=4M -o ashift=12 -O atime=off -O
     raidz2 ${c[9]} ${c[10]} \
     raidz2 ${c[11]} ${c[12]}
 
-zpool create -f -O compression=lz4 -O atime=off -O xattr=sa -O dedup=off -m /data/meta meta mirror sdb sdc
+zpool create -f -O compression=lz4 -O atime=off -O xattr=sa -O dedup=off -O autotrim=on -m /data/meta meta mirror sdb sdc
 
 zpool export pool-1
 zpool export pool-2
