@@ -36,7 +36,7 @@
   when: ansible_{{ item }}.device is defined
   with_items: "{{ network_interface }}"
   
-- shell: "/opt/beegfs/sbin/beegfs-setup-storage -p {{ item.1 }} -s {{ index_method }} -i {{ index_method }}{{ item.0 }} }}"
+- shell: "/opt/beegfs/sbin/beegfs-setup-storage -p {{ item.1 }} -s {{ index_method }} -i {{ index_method }}{{ item.0 }}"
   with_indexed_items: "{{ storage_dir }}"
   failed_when: false
       
