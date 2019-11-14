@@ -9,7 +9,7 @@ real	1m10.401s
 user	0m0.074s
 sys	0m31.794s
 
-2327MB/s
+2327MB/s, that's the limit of 3Gbs SAS
 
 -bash-4.2$ tail slurm-212.out 
 
