@@ -1,34 +1,15 @@
 
 ```
-left enclosure:(front view)
-1: 9:0:62:0
-2: 9:0:4:0
-3: 8:0:62:0
-4: 8:0:4:0
-5: 7:0:62:0
-
-right enclosure:(front view)
-6: 7:0:4:0
-7: 6:0:62:0
-8: 6:0:4:0
-9: 10:0:62:0
-10: 10:0:4:0
-
-[6:0:4:0] MXE3400015HRB022
-[6:0:62:0] MXE3400011MRB08F
-[7:0:4:0] MXE3400014IRB1CC
-[7:0:62:0] MXE3400014IRB1D3
-[8:0:4:0] MXE3400014IRB171
-[8:0:62:0] MXE3400014IRB1DC
-[9:0:4:0] MXE3400014IRB1E1
-[9:0:62:0] MXE3400011MRB003
-[10:0:4:0] MXE3400014IRB1C2
-[10:0:62:0] MXE3400011MRB020
-
-[root@hpc-10ke2 ~]# dd if=/dev/zero of=/data/pool-4/output bs=2M count=20k
+[root@ddn01 ~]# time dcfldd if=/dev/zero of=/data/pool-1/output of=/data/pool-2/output bs=4M count=20k
+20480 blocks (81920Mb) written.
 20480+0 records in
 20480+0 records out
-42949672960 bytes (43 GB) copied, 54.0489 s, 795 MB/s
+
+real	1m10.401s
+user	0m0.074s
+sys	0m31.794s
+
+2327MB/s
 
 -bash-4.2$ tail slurm-212.out 
 
