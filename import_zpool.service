@@ -1,6 +1,6 @@
 [Unit]
 Description=Import zfs pools for beegfs
-After=network-online.target rdma.service zfs.target
+After=network-online.target rdma.service zfs.target multipathd.service
 
 [Service]
 Type=oneshot
