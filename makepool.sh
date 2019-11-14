@@ -26,3 +26,9 @@ zpool create -f -O compression=off -O recordsize=4M -o ashift=12 -O atime=off -O
     pool-2 raidz2 ${c[7]} ${c[8]} \
     raidz2 ${c[9]} ${c[10]} \
     raidz2 ${c[11]} ${c[12]}
+
+zpool export pool-1
+zpool export pool-2
+
+zpool import -d /dev/mapper pool-1
+zpool import -d /dev/mapper pool-2
