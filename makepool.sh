@@ -17,12 +17,12 @@ echo ${c[12]}
 echo ${d[11]}
 #2x multipath, using only c for pool creation, followed by export and zpool import -d /dev/mapper -a
 
-zpool create -f -O compression=off -O recordsize=4M -o ashift=12 -O atime=off -O xattr=off -O dedup=off -m /data/pool-1 \
+zpool create -f -O compression=lz4 -O recordsize=4M -o ashift=12 -O atime=off -O xattr=off -O dedup=off -m /data/pool-1 \
     pool-1 raidz2 ${c[1]} ${c[2]} \
     raidz2 ${c[3]} ${c[4]} \
     raidz2 ${c[5]} ${c[6]}
 
-zpool create -f -O compression=off -O recordsize=4M -o ashift=12 -O atime=off -O xattr=off -O dedup=off -m /data/pool-2 \
+zpool create -f -O compression=lz4 -O recordsize=4M -o ashift=12 -O atime=off -O xattr=off -O dedup=off -m /data/pool-2 \
     pool-2 raidz2 ${c[7]} ${c[8]} \
     raidz2 ${c[9]} ${c[10]} \
     raidz2 ${c[11]} ${c[12]}
