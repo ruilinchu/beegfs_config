@@ -64,4 +64,25 @@ Stripe pattern details:
 #SBATCH -n 5
 srun --mpi=pmix_v2 ior -v -w -r -i 4 -F -t 2m -b 10g
 
+MDS zfs need different tunings, ref
+pool options:
+ashift=9 (for space reasons)
+dataset options:
+recordsize=128K
+compression=off
+atime=off
+xattr=sa
+dnodesize=auto
+zfs module options:
+zfs_prefetch_disable=1
+metaslab_debug_unload=1
+zfs_dirty_data_max=2147483648
+zfs_vdev_async_write_min_active=5
+zfs_vdev_async_write_max_active=15
+zfs_vdev_async_write_active_min_dirty_percent=20
+zfs_vdev_scheduler=deadline
+zfs_arc_max=103079215104
+zfs_arc_meta_limit=103079215104
+
+
 ```
