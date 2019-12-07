@@ -10,10 +10,10 @@ fi
 ## sddp    5000cca222f396c5
 
 for enc in `ls /sys/class/enclosure`; do
-for i in $(seq 0 4); do
- for j in $(seq 0 9) A B; do
+  for i in $(seq 0 4); do
+    for j in $(seq 0 9) A B; do
 	 device=$(awk '{print $1,$3,$4}' hdd_serial | grep "$i$j"| grep "$enc" | awk '{print $3}');
 	 echo $device
- done | xargs
-done > disk.`echo $enc|tr ":" "_"`
+    done | xargs
+  done > disk.`echo $enc|tr ":" "_"`
 done
