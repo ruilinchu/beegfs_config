@@ -1,0 +1,9 @@
+#!/bin/bash
+
+lsblk --nodeps -o name,serial > hdd_serial
+./ddn01/DDN1/encled >> hdd_serial
+
+## [root@ddn02 ~]# grep 5000cca222f396c5 hdd_serial 
+## sdcn    5000cca222f396c5
+## sddp    5000cca222f396c5
+
