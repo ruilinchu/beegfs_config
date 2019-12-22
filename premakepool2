@@ -2,7 +2,7 @@
 
 if [ ! -f hdd_serial ]; then
   lsblk --nodeps -o name,serial > hdd_serial
-  ./ddn01/DDN1/encled >> hdd_serial
+  ./encled >> hdd_serial
 fi
 
 ## [root@ddn02 ~]# grep 5000cca222f396c5 hdd_serial 
