@@ -31,9 +31,8 @@ zpool create -f -O compression=lz4 -O recordsize=4M -o ashift=12 -O atime=off -O
     raidz2 ${c[11]} ${c[12]} \
     cache nvme0n1
 
+## need to check if it's indeed sdb and sdc, sometimes it's not
 zpool create -f -O compression=lz4 -O atime=off -O xattr=sa -O dedup=off -O autotrim=on -m /data/meta meta mirror sdb sdc
 
-zpool export $poolname
 
-zpool import -d /dev/mapper $poolname
 
