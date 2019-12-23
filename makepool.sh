@@ -1,8 +1,8 @@
 #!/bin/sh
 #set -x
 #
-# this is for a 60 tray 5rowx12col JBOD enclosure, 2col=1vdev, 3vdev=1pool=30HDD, for enc 01 with 4TB hdd
-# for rest of 9 enc with 2TB hdd, 2col=1vdev, 6vdev=1pool
+# this is for a 60 tray 5rowx12col JBOD enclosure, 2col=1vdev, 
+# 6vdev=1pool
 #
 
 declare -a c
