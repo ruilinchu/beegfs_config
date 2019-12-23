@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -f hdd_serial ]; then
-  lsblk --nodeps -o name,serial > hdd_serial
+  lsblk --nodeps -o name,size,serial > hdd_serial
   ./encled >> hdd_serial
 fi
 
