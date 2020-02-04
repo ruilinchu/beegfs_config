@@ -1,5 +1,29 @@
 
 ```
+# beegfs-ctl --storagebench --alltargets --status --verbose
+
+Server benchmark status:
+Finished:    10
+
+Write benchmark results:
+Min throughput:            1674695  KiB/s   nodeID: ddn03.hpc.usc.edu [ID: 3], targetID: 30
+Max throughput:            2671112  KiB/s   nodeID: ddn01.hpc.usc.edu [ID: 1], targetID: 10
+Avg throughput:            1984877  KiB/s
+Aggregate throughput:     19848771  KiB/s
+
+List of all targets:
+10                         2671112  KiB/s   nodeID: ddn01.hpc.usc.edu [ID: 1]
+20                         1944102  KiB/s   nodeID: ddn02.hpc.usc.edu [ID: 2]
+30                         1674695  KiB/s   nodeID: ddn03.hpc.usc.edu [ID: 3]
+40                         1959559  KiB/s   nodeID: ddn04.hpc.usc.edu [ID: 4]
+50                         1968269  KiB/s   nodeID: ddn05.hpc.usc.edu [ID: 5]
+60                         1921547  KiB/s   nodeID: ddn06.hpc.usc.edu [ID: 6]
+70                         1925734  KiB/s   nodeID: ddn07.hpc.usc.edu [ID: 7]
+80                         1937437  KiB/s   nodeID: ddn08.hpc.usc.edu [ID: 8]
+90                         1931541  KiB/s   nodeID: ddn09.hpc.usc.edu [ID: 9]
+100                        1914775  KiB/s   nodeID: ddn10.hpc.usc.edu [ID: 10]
+
+
 [root@ddn01 ~]# time dcfldd if=/dev/zero of=/data/pool-1/output of=/data/pool-2/output bs=4M count=20k
 20480 blocks (81920Mb) written.
 20480+0 records in
