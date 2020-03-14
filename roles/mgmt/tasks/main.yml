@@ -6,15 +6,7 @@
     - beegfs-client-devel
     - beegfs-admon
 
-# - name: install beegfs rpm
-#   yum: name={{ item }}
-#   with_fileglob:
-#     - /usr/local/src/beegfs-common*
-#     - /usr/local/src/beegfs-opentk-lib*
-#     - /usr/local/src/beegfs-mgmtd*
-#     - /usr/local/src/beegfs-admon*
-#     - /usr/local/src/beegfs-helperd*
-#     - /usr/local/src/beegfs-utils*
+- name: tune net.ipv4.neigh.default.gc_thresh1,2 & 3, really important
 
 - name: install beegfs rpm
   yum: name={{ item }}
