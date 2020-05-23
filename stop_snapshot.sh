@@ -24,3 +24,6 @@ pdsh -w ${storage_node} << EOF
 systemctl stop beegfs-storage@snapshot
 zfs destroy -r data/snapshot
 EOF
+
+echo
+echo

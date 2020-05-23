@@ -4,7 +4,7 @@ mgmt_node=bee1
 meta_node=bee[1-2]
 storage_node=bee[1-2]
 
-snap_name=hourly-2020-05-23-0653
+snap_name=hourly-2020-05-23-0700
 
 pdsh -w ${mgmt_node} << EOF
 zfs clone -o mountpoint=/snapshot/mgmt mgmt@zfs-auto-snap_${snap_name}      mgmt/snapshot
@@ -27,4 +27,5 @@ zfs clone -o mountpoint=/snapshot/data data@zfs-auto-snap_${snap_name}      data
 systemctl start beegfs-storage@snapshot
 EOF
 
+echo
 echo
