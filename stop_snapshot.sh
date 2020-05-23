@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 mgmt_node=bee1
 meta_node=bee[1-2]
