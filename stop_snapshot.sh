@@ -1,7 +1,20 @@
-systemctl stop beegfs-mgmtd@snapshot
-systemctl stop beegfs-meta@snapshot
-systemctl stop beegfs-storage@snapshot
+#!/bin/bash
 
-zfs destroy -r meta/snapshot
-zfs destroy -r data/snapshot
+mgmt_node=bee1
+meta_node=bee[1-2]
+storage_node=bee[1-2]
+
+pdsh -w ${mgmt_node} << EOF
+systemctl stop beegfs-mgmtd@snapshot
 zfs destroy -r mgmt/snapshot
+EOF
+
+pdsh -w ${meta_node} << EOF
+systemctl stop beegfs-meta@snapshot
+zfs destroy -r meta/snapshot
+EOF
+
+pdsh -w ${storage_node} << EOF
+systemctl stop beegfs-storage@snapshot
+zfs destroy -r data/snapshot
+EOF
