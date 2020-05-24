@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-mgmt_node=bee1
+## mgmt_node=bee3
 meta_node=bee[1-2]
 storage_node=bee[1-2]
 
