@@ -5,14 +5,6 @@ mgmt_node=bee1
 meta_node=bee[1-2]
 storage_node=bee[1-2]
 
-pdsh -w ${mgmt_node} << EOF
-systemctl stop beegfs-mgmtd@snapshot
-zfs destroy -r mgmt/snapshot
-EOF
-
-echo 
-echo
-
 pdsh -w ${meta_node} << EOF
 systemctl stop beegfs-meta@snapshot
 zfs destroy -r meta/snapshot
